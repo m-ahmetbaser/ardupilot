@@ -1,7 +1,7 @@
 name: Macos Build
 
 on:
-  push:
+  workflow_dispatch:
     paths-ignore:
       # remove other env install scripts
       - 'Tools/environment_install/APM_install.sh'

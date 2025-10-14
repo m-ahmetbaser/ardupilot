@@ -1,7 +1,7 @@
 name: test unit tests and sitl building
 
 on:
-  push:
+  workflow_dispatch:
     paths-ignore:
       # Remove markdown files as irrelevant
       - '**.md'

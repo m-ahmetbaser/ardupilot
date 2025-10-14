@@ -1,0 +1,38 @@
+#!/usr/bin/make -f
+
+DEB_BUILD_OPTIONS=noautodbgsym
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	task clean
+
+override_dh_auto_test:
+	:
+
+override_dh_auto_configure:
+	:
+
+override_dh_auto_build:
+	install -d debian/ardupilot
+	VEHICLE=plane task build
+
+override_dh_auto_install:
+	install -d debian/ardupilot/usr/bin debian/ardupilot/etc debian/ardupilot/etc/systemd/system debian/ardupilot/var
+	
+	cp -r gemstone/etc/* debian/ardupilot/etc/
+	cp -r gemstone/systemd/* debian/ardupilot/etc/systemd/system
+
+	if [ -d build/t3-gem-o1/bin ]; then \
+		install -m 755 build/t3-gem-o1/bin/* debian/ardupilot/usr/bin/; \
+	fi
+
+override_dh_auto_strip:
+	:
+
+override_dh_strip:
+	:

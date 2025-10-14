@@ -3,7 +3,7 @@ on:
   schedule:
     - cron: '0 0 * * 6'  # every saturday at midnight
   workflow_dispatch:
-  push:
+  workflow_dispatch:
     paths:
       - '.github/workflows/test_environment.yml'
       - 'Tools/environment_install/**'

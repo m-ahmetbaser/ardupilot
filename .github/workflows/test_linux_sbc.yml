@@ -1,7 +1,7 @@
 name: test Linux SBC
 
 on:
-  push:
+  workflow_dispatch:
     paths-ignore:
       # remove non LINUX HAL
       - 'libraries/AP_HAL_ChibiOS/**'

@@ -1,7 +1,7 @@
 name: test dds
 
 on:
-  push:
+  workflow_dispatch:
     paths-ignore:
       # remove not tests vehicles
       - 'AntennaTracker/**'

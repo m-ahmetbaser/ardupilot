@@ -1,7 +1,7 @@
 name: test rover
 
 on:
-  push:
+  workflow_dispatch:
     paths-ignore:
       # remove other vehicles
       - 'AntennaTracker/**'

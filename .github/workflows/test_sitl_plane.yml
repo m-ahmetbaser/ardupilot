@@ -1,7 +1,7 @@
 name: test plane
 
 on:
-  push:
+  workflow_dispatch:
     paths-ignore:
       # remove other vehicles
       - 'AntennaTracker/**'
