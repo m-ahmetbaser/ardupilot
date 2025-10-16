@@ -1,0 +1,18 @@
+Source: t3-gem-ardupilot
+Section: misc
+Priority: extra
+Maintainer: Gemstone Dev Team <dev@t3gemstone.org>
+Build-Depends:
+ debhelper (>= 9)
+ , libtool
+Standards-Version: 4.5.1
+Homepage: https://github.com/t3gemstone/ardupilot.git;a=summary
+
+Package: t3-gem-ardupilot
+Architecture: arm64
+Depends:
+ ${shlibs:Depends}
+ , ${misc:Depends}
+ , ${systemd:Depends}
+Description: T3 Gemstone ardupilot
+ T3 Gemstone ardupilot

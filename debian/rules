@@ -1,0 +1,58 @@
+#!/usr/bin/make -f
+
+DEB_BUILD_OPTIONS=noautodbgsym
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+%:
+	dh $@ --with systemd
+
+BUILDDIR=build/t3-gem-o1
+TARGETDIR=debian/t3-gem-ardupilot
+
+override_dh_auto_clean:
+	:
+
+override_dh_auto_test:
+	:
+
+override_dh_auto_configure:
+	:
+
+override_dh_auto_build:
+	install -d $(TARGETDIR)
+
+	./waf distclean && \
+	./waf configure --board t3-gem-o1 && \
+	./waf copter && \
+	./waf plane && \
+	./waf rover && \
+	./waf sub
+
+	find "$(BUILDDIR)/bin" -type f | while read -r file; do \
+		aarch64-linux-gnu-strip $$file; \
+	done
+
+override_dh_auto_install:
+	install -d $(TARGETDIR)/opt/ardupilot/bin $(TARGETDIR)/opt/ardupilot/etc $(TARGETDIR)/lib/systemd/system $(TARGETDIR)/opt/ardupilot/var
+	
+	cp -r gemstone/etc/* $(TARGETDIR)/opt/ardupilot/etc
+	cp -r gemstone/systemd/* $(TARGETDIR)/lib/systemd/system
+
+	if [ -d $(BUILDDIR)/bin ]; then \
+		install -m 755 $(BUILDDIR)/bin/* $(TARGETDIR)/opt/ardupilot/bin/; \
+	fi
+
+override_dh_auto_strip:
+	:
+
+override_dh_strip:
+	:
+
+override_dh_systemd_enable:
+    :
+
+override_dh_systemd_start:
+	:
+
